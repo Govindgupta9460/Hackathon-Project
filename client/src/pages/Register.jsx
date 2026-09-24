@@ -44,7 +44,7 @@ const Register = () => {
       await register(formData);
       navigate('/events', { replace: true });
     } catch (err) {
-      const msg = err.response?.data?.message || 'Registration failed. Please try again.';
+      const msg = err.response?.data?.message || (err.message === 'Network Error' ? 'Cannot connect to backend server. Please verify your backend server is running and VITE_API_URL is configured.' : err.message) || 'Registration failed. Please try again.';
       setError(msg);
     } finally {
       setLoading(false);

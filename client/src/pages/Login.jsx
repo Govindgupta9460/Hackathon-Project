@@ -39,7 +39,7 @@ const Login = () => {
       await login(formData);
       navigate(from, { replace: true });
     } catch (err) {
-      const msg = err.response?.data?.message || 'Login failed. Please check your credentials.';
+      const msg = err.response?.data?.message || (err.message === 'Network Error' ? 'Cannot connect to backend server. Please verify your backend server is running and VITE_API_URL is configured.' : err.message) || 'Login failed. Please check your credentials.';
       setError(msg);
     } finally {
       setLoading(false);
